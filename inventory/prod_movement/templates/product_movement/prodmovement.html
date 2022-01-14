@@ -1,0 +1,62 @@
+{%extends 'product/base.html'%}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} ProductMovement {%endblock%}</title>
+</head>
+{%block body%}
+
+<body>
+    <div class="container" style="padding-top: 3rem">
+        {% if data %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <h4>Serial No</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Timestamp</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Product Name</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Source Location</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Destination Location</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Product Quantity</h4>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ d.timestamp }}</td>
+                    <td>{{ d.pid }}</td>
+                    <td>{{ d.f_location }}</td>
+                    <td>{{ d.t_location }}</td>
+                    <td>{{ d.qty }}</td>
+                    <td><a class="btn btn-outline-primary btn-sm" href="{% url 'edit_prod' pk=d.mid %}">Move Product</a>
+                    </td>
+
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% else %}
+        <h3 style="text-align: center;">Move Product to view it</h3>
+        {%endif%}
+    </div>
+</body>
+{%endblock body%}
+
+</html>

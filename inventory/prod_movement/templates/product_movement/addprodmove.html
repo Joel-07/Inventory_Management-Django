@@ -1,0 +1,57 @@
+{%extends 'product/base.html'%}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Moving Product {%endblock%}</title>
+</head>
+
+<body>
+    {%block body%}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h1 class="display-3">Move Product</h1>
+                <br><br>
+                <div class="info-form">
+                    <form action="{% url 'display_prodmove' %}" method="POST"
+                        class="form-inline justify-content-center">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>
+                                <h4>Product Id</h4>
+                            </label>
+                            <input name="pid" type="text" class="form-control" value="{{ data.pid }}" readonly>
+                        </div>
+                        <br>
+                        <label>
+                            <h4>Location</h4>
+                        </label>
+                        <select class="form-select" aria-label="Default select example" name='dname' id="select1">
+                            <option>Destination</option>
+                            {%for l in loc%}
+                            <option value="{{ l.location }}">{{ l.location }}</option>
+                            {%endfor%}
+                        </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>
+                        <h4>Product Quantity (between 1 to {{ data.qty }})</h4>
+                    </label>
+                    <input type="number" name="pqty" id="quantity" class="form-control" min="1" max="{{ data.qty }}"
+                        required>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success ">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    {%endblock body%}
+</body>
+
+</html>

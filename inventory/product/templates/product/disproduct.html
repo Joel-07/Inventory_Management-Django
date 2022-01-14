@@ -1,0 +1,59 @@
+{%extends 'product/base.html'%}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Product {%endblock%}</title>
+</head>
+{%block body%}
+
+<body>
+    <div class="container py-5">
+        {%if data%}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <h4>Serial No</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Product Name</h4>
+                    </th>
+                    <th scope="col">
+                        <h4>Product Quantity</h4>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>
+                        <h6>{{ d.pname }}</h6>
+                    </td>
+                    <td>
+                        <h6>{{ d.qty }}</h6>
+                    </td>
+                    <td><a class="btn btn-outline-primary btn-sm" href="{% url 'add_prodmove' pk=d.pid%}">Move
+                            Product</a></td>
+                    <td><a href="{% url 'edit_product' pk=d.pid%}"><i class="fa fa-edit fa-2x"></i></a></td>
+                    <td><a href="{% url 'prod_delete' pk=d.pid %}"><i class="fa fa-trash fa-2x"></i></a></td>
+
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {%else%}
+        <h3 style="text-align: center;">No Product found,Add one!</h3>
+        {%endif%}
+    </div>
+    <div class="container my-2" style="text-align: center;">
+        <a class="btn btn-primary btn-lg" href="{%url 'add_product'%}">Add Product</a>
+    </div>
+</body>
+{%endblock body%}
+
+</html>

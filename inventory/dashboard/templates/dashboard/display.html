@@ -1,0 +1,63 @@
+{%extends 'product/base.html'%}
+{% load crispy_forms_tags %}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Dashboard {%endblock%}</title>
+</head>
+{%block body%}
+
+<body>
+    <form action="" method="POST">
+        {%csrf_token%}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    {{ form|crispy }}
+                </div>
+            </div>
+            <div class="my-3" style="text-align: center;">
+                <button type="submit" class="btn btn-success" style="text-align: center;">Search</button>
+            </div>
+        </div>
+    </form>
+    <div class="container py-5">
+        {% if data%}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Serial No.</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Warehouse</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>
+                        <h6>{{ d.pid }}</h6>
+                    </td>
+                    <td>
+                        <h6>{{ d.warehouse }}</h6>
+                    </td>
+                    <td>
+                        <h6>{{ d.qty }}</h6>
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        {% else %}
+        <h3 style="text-align: center;">No Data Available</h3>
+        {%endif%}
+    </div>
+
+</body>
+{%endblock body%}
+
+</html>

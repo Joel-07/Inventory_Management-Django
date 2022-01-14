@@ -1,0 +1,44 @@
+{%extends 'product/base.html'%}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Update {%endblock%}</title>
+</head>
+
+<body>
+    {%block body%}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1 text-center">
+                <h1 class="display-3">Update Product</h1>
+                <br><br>
+                <div class="info-form">
+                    <form action="" method="POST" class="form-inline justify-content-center">
+                        {%csrf_token%}
+                        <div class="form-group">
+                            <label>
+                                <h4>Product Name</h4>
+                            </label>
+                            <input name="pname" type="text" class="form-control" value="{{ data.pname }}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>
+                                <h4>Product Quantity</h4>
+                            </label>
+                            <input name="pqty" type="text" class="form-control" value="{{ data.qty }}">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success ">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock body%}
+</body>
+
+</html>

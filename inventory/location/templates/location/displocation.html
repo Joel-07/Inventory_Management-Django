@@ -1,0 +1,70 @@
+{%extends 'product/base.html'%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} Location {%endblock%}</title>
+</head>
+{%block body%}
+<body>
+    <div class="container py-5" style="text-align: center;">
+    <label for="formGroupExampleInput"><h3>Add location</h3></label>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% if d %}
+        <input list="location" name="lname" value="{{ d.location }}">
+        <datalist id="location">
+            <option value="Mumbai">
+            <option value="Banglore">
+            <option value="Chennai">
+            <option value="Delhi">
+            <option value="Pune">
+            <option value="Hyderabad">
+        </datalist>
+        {% else %}
+        <input list="location" name="lname" >
+        <datalist id="location">
+          <option value="Mumbai">
+          <option value="Banglore">
+          <option value="Chennai">
+          <option value="Delhi">
+          <option value="Pune">
+          <option value="Hyderabad">
+        </datalist>
+        {% endif %}
+
+      
+        <button type="submit" class="btn btn-primary my-1">Submit</button>
+    </form>
+    </div>  
+
+    <div class="container ">
+        {%if data%}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"><h4>Serial No</h4></th>
+                <th scope="col"><h4>Location ID</h4></th>
+                <th scope="col"><h4>Location</h4></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for d in data %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{ d.lid }}</td>
+                <td>{{ d.location }}</td>
+                <td><a href="{% url 'edit_location' pk=d.lid %}"><i class="fa fa-edit"></i></a></td>
+                <td><a href="{% url 'loc_delete' pk=d.lid%}"><i class="fa fa-trash"></i></a></td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+        {%else%}
+        <h3 style="text-align: center;">No location found,Add one!</h3>
+        {%endif%}
+    </div> 
+</body>
+{%endblock body%}
+</html>
